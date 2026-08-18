@@ -1,0 +1,51 @@
+{
+  "name": "fulfil",
+  "displayName": "Fulfil",
+  "version": "0.1.0",
+  "description": "Connect Cursor to your Fulfil ERP workspace \u2014 query orders, inventory, shipments and invoices, read live API docs while building integrations, run reports, query the data warehouse, and build Micro Apps, via Fulfil's remote MCP server.",
+  "author": {
+    "name": "Fulfil.IO",
+    "email": "support@fulfil.io"
+  },
+  "publisher": "Fulfil.IO",
+  "homepage": "https://developers.fulfil.io",
+  "repository": "https://github.com/fulfilio/agent-plugins",
+  "license": "MIT",
+  "logo": "assets/logo.svg",
+  "keywords": [
+    "fulfil",
+    "erp",
+    "mcp",
+    "commerce",
+    "inventory",
+    "orders",
+    "wms",
+    "analytics",
+    "internal tools"
+  ],
+  "category": "integrations",
+  "tags": [
+    "mcp",
+    "erp",
+    "commerce",
+    "fulfil",
+    "analytics"
+  ],
+  "rules": "./rules/",
+  "skills": "./skills/",
+  "commands": "./commands/",
+  "variables": {
+    "type": "object",
+    "properties": {
+      "FULFIL_MCP_URL": {
+        "type": "string",
+        "title": "Fulfil MCP server URL",
+        "description": "https://<workspace-id>.fulfil.io/mcp/v1/http \u2014 replace <workspace-id> with your Fulfil workspace ID."
+      }
+    },
+    "required": [
+      "FULFIL_MCP_URL"
+    ]
+  },
+  "mcpServers": "./mcp.json"
+}

@@ -1,0 +1,24 @@
+---
+description: Structural constraints for Fulfil Micro App source files — no bundler, no imports, session-based data access. Apply when editing files in a Fulfil micro app directory.
+globs: ["**/micro-apps/**/*.jsx", "**/micro-apps/**/*.js", "**/micro-apps/**/*.css"]
+alwaysApply: false
+---
+
+# Micro App source constraints
+
+These files are transpiled in the browser and injected into a host page that
+already loads every library. They are **not** bundled.
+
+- No `import` / `require` — libraries are globals. Read the current list from the
+  `fulfil://guide/micro-apps` resource on the fulfil MCP server before writing code.
+- No HTML shell, no `<script>` tags — the page is generated.
+- No auth code, API keys, `.env`, or CORS handling — the app runs same-origin on
+  the user's Fulfil session.
+- No build config for the app itself.
+- `app.jsx` is the entry point and must render into `#root`.
+
+## Data
+
+All data access goes through `window.__FULFIL__`. Wrap every call: when one
+fails, render the error in the UI. A chart that silently renders empty because
+the call was refused is a bug, not a fallback.

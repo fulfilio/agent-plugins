@@ -1,0 +1,30 @@
+---
+description: Cost and correctness rules for the Fulfil data warehouse. Apply before calling query_data_warehouse or writing SQL against a Fulfil workspace dataset.
+alwaysApply: false
+---
+
+# Data warehouse query rules
+
+Scanned bytes bill against a **shared daily workspace budget**. Exhausting it
+blocks analytics for everyone in that workspace until it resets.
+
+## Before writing SQL
+
+`discover_tables` then `get_table_schema`. Tables and columns differ per
+workspace — never guess one. A failed query still scans and still bills.
+
+## Writing SQL
+
+- Name the columns you need. `SELECT *` on a wide table is the most expensive
+  habit available.
+- Bound the date range on anything historical, using the table's own date column.
+- Read-only queries only.
+- **Never paginate with `OFFSET`** — each page re-scans the whole table. Use
+  keyset pagination: order by a unique key, filter past the last row seen.
+
+## Reporting
+
+- Quote the date range, filters, and row limit alongside the numbers.
+- Say when a result was truncated by the limit instead of presenting it as complete.
+- On a budget or permission error, show the user the server's message. Do not
+  retry, and do not quietly substitute an approximation from the record API.

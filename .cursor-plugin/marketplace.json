@@ -1,0 +1,18 @@
+{
+  "name": "fulfil",
+  "owner": {
+    "name": "Fulfil.IO",
+    "email": "support@fulfil.io"
+  },
+  "metadata": {
+    "description": "Agent plugins from Fulfil.IO — connect coding agents to your Fulfil ERP workspace.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "fulfil",
+      "source": "./plugins/fulfil",
+      "description": "Connect to your Fulfil ERP workspace — query records, read live API docs, run reports, query the data warehouse, and build Micro Apps."
+    }
+  ]
+}

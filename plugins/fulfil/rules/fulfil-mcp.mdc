@@ -1,0 +1,33 @@
+---
+description: How to use the Fulfil MCP server — discover before calling, and report results honestly. Apply whenever using any tool from the fulfil MCP server.
+alwaysApply: false
+---
+
+# Using the Fulfil MCP server
+
+The tools describe themselves at runtime. This file covers only what they cannot.
+
+## Discover, then call
+
+`list_models` → `get_model_jsonrpc_api_docs(model_name)` → `rpc(...)`.
+
+Never call `rpc` with a method name or parameter shape you have not read from the
+docs tool in this session. Methods and schemas differ per model and per
+workspace, and a guess that happens to work once is not evidence it was right.
+
+- Looking for one specific record: `search`, then `fetch`.
+- Question about how Fulfil behaves: `search_fulfil_docs`. Do not answer from memory.
+
+## Model names
+
+Underscore form only — `sales_order`, not `sale.sale`. A rejected name comes back
+with the correct suggestion; use it instead of trying variants.
+
+A model absent from `list_models` is not reachable for this user. Say so rather
+than routing around it.
+
+## Reporting
+
+- One page of results is not a total. Use `count`, or page to the end.
+- State the filters you actually ran next to any number you report.
+- If you truncated, narrowed, or dropped a condition, say so in the answer.

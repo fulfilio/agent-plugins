@@ -1,0 +1,33 @@
+---
+description: Safety rules for writing to Fulfil — creating, updating, deleting, or triggering actions through the rpc MCP tool. Apply before any non-read call to the fulfil MCP server.
+alwaysApply: false
+---
+
+# Writing to Fulfil
+
+`rpc` is not read-only. Creates, updates, deletes, and state-changing actions run
+against the user's **live production ERP**. There is no sandbox and no undo.
+
+## Before any write
+
+1. Read the method's parameter schema from `get_model_jsonrpc_api_docs`.
+2. Resolve the affected records first and show the user what will change — how
+   many, which ones, and the exact values.
+3. Get explicit confirmation. Approval of one plan does not cover the next.
+
+## While writing
+
+- Batch in amounts you can describe. Do not fan one instruction across hundreds
+  of records without saying so first.
+- Read the result back and report what actually changed. A call that returned is
+  not proof of the change you intended.
+- Report partial failures explicitly, with which records failed and why. Never
+  summarise a partial write as done.
+- An error from Fulfil is a business rule, not an obstacle. Surface the message
+  verbatim; do not retry with different arguments to get past it.
+
+## Never
+
+- Never delete records you created while exploring unless asked.
+- Never write to accounting, pricing, or configuration models the user did not
+  name in the request.

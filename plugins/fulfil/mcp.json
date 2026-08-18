@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "fulfil": {
+      "type": "http",
+      "url": "${FULFIL_MCP_URL}"
+    }
+  }
+}
